@@ -26,7 +26,12 @@ function App() {
 		}
 		return (
 			<li key={move}>
-				<button onClick={() => jumpTo(move)}>{description}</button>
+				{move === currentMove ? (
+                    <span>You are at move #{move}</span>
+                ) : (
+                    <button onClick={() => jumpTo(move)}>{description}</button>
+                )}
+
 			</li>
 		)
 	}
