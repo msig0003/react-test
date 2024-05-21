@@ -4,6 +4,7 @@ import Board from './components/Board';
 function App() {
 	const [history, setHistory] = useState([Array(9).fill(null)]);
 	const [currentMove, setCurrentMove] = useState(0);
+	const [isAscending, setIsAscending] = useState(true);
 	const xIsNext = currentMove % 2 === 0;
 	const currentSquares = history[currentMove];
 
@@ -17,6 +18,10 @@ function App() {
 		setCurrentMove(nextMove);
 	}
 
+	function toggleSort() {
+		setIsAscending(!isAscending);
+	}
+
 	const moves = history.map((squares, move) => {
 		let description;
 		if (move > 0) {
@@ -27,15 +32,17 @@ function App() {
 		return (
 			<li key={move}>
 				{move === currentMove ? (
-                    <span>You are at move #{move}</span>
-                ) : (
-                    <button onClick={() => jumpTo(move)}>{description}</button>
-                )}
+					<span>You are at move #{move}</span>
+				) : (
+					<button onClick={() => jumpTo(move)}>{description}</button>
+				)}
 
 			</li>
 		)
 	}
 	)
+
+	const sortedMoves = isAscending ? moves : moves.slice().reverse();
 
 	return (
 		<>
@@ -45,7 +52,10 @@ function App() {
 				</div>
 			</div>
 			<div className='game-info'>
-				<ol>{moves}</ol>
+				<button onClick={toggleSort}>
+					Sort {isAscending ? 'Descending' : 'Ascending'}
+				</button>
+				<ol>{sortedMoves}</ol>
 			</div>
 		</>
 
