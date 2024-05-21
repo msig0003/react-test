@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import Square from './Square.js'
 
-export default function Board() {
-    const [squares, setSquares] = useState(Array(9).fill(null));
-    const [xIsNext, setXIsNext] = useState(true);
+export default function Board({xIsNext, squares, onPlay}) {
 
     const winner = calculateWinner(squares);
     let status;
@@ -20,10 +18,9 @@ export default function Board() {
         const nextSquares = squares.slice();
         if (xIsNext) { nextSquares[i] = "x" }
         else { nextSquares[i] = "o" }
-        setSquares(nextSquares);
-        setXIsNext(!xIsNext);
+        onPlay(nextSquares);
     }
-    
+
     return (
         <>
             <div className='status'>{status}</div>
