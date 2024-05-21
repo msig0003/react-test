@@ -1,5 +1,7 @@
-export default function Button() {
+export default function Button({count, onClick}) {
+   
+
     return (
-        <button>"Hello!"</button> 
+        <button onClick={onClick}>clicked {count}</button> 
     )
 }

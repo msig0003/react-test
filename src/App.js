@@ -1,14 +1,20 @@
-import './App.css';
 import Message from './components/Message.js'
-import Image from './components/Image.js'
 import Button from './components/Button.js'
+import { useState } from 'react';
+
 
 function App() {
+	const [count, setCount] = useState(0);
+
+    function onClick() {
+        setCount(count +1);
+    }
+
 	return (
-		<div className="App">
+		<div>
 			<Message />
-			<Button />
-			<Image />
+			<Button count={count} onClick={onClick}/>
+			<Button count={count} onClick={onClick}/>
 		</div>
 	);
 }
